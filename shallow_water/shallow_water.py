@@ -39,7 +39,7 @@ def goto_section(mfile, section):
     for line in mfile:
         if line.rstrip() == section:
             return
-    raise Exception("")
+    raise Exception("Cannot find section " + section)
 
 def parse_vertices(mfile):
     goto_section(mfile, "Vertices")

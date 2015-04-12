@@ -15,8 +15,10 @@
 #  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 #
 # ##### END GPL LICENSE BLOCK #####
-# Contributed to by
-# Pontiac, Fourmadmen, varkenvarken, tuga3d, meta-androcto, metalliandy, dreampainter & cotejrp1#
+
+import bpy
+from bpy.props import StringProperty, BoolProperty
+from bpy_extras.io_utils import ImportHelper
 
 bl_info = {
     "name": "Shallow Water",
@@ -29,16 +31,6 @@ bl_info = {
     "wiki_url": "http://ssrb.github.io",
     "category": "Import-Export",
 }
-
-if "bpy" in locals():
-    import imp
-    if "shallow_water" in locals():
-        imp.reload(shallow_water)
-
-import bpy
-from bpy.props import StringProperty, BoolProperty
-
-from bpy_extras.io_utils import ImportHelper
 
 class ImportShallowWaterBody(bpy.types.Operator, ImportHelper):
     """Import a Shallow Water Body"""
@@ -70,15 +62,11 @@ class ImportShallowWaterBody(bpy.types.Operator, ImportHelper):
 def menu_func_import(self, context):
     self.layout.operator(ImportShallowWaterBody.bl_idname, text="Shallow Water Body (.mesh)")
 
-
 def register():
     bpy.utils.register_module(__name__)
     bpy.types.INFO_MT_file_import.append(menu_func_import)
-
 
 def unregister():
     bpy.utils.unregister_module(__name__)
     bpy.types.INFO_MT_file_import.remove(menu_func_import)
 
-if __name__ == "__main__":
-    register()
